@@ -1,0 +1,45 @@
+.encabezado {
+  margin-bottom: 2rem;
+}
+
+.encabezado p {
+  color: #777;
+  margin: 0;
+}
+
+.encabezado h1 {
+  margin: .5rem 0;
+}
+
+.encabezado span {
+  color: #666;
+}
+
+p-card {
+  display: block;
+}
+
+.cuadricula {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.cuadricula p {
+  min-height: 3rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.acciones a {
+  text-decoration: none;
+}
+

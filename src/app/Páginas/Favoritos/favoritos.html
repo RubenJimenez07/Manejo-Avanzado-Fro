@@ -1,0 +1,54 @@
+<header class="encabezado">
+  <p>CATÁLOGO LOCAL</p>
+  <h1>Mis favoritos</h1>
+  <span>Aquí aparecerán los productos que agregues a favoritos.</span>
+</header>
+
+<p><strong>Total de favoritos:</strong> {{ total() }}</p>
+
+@if (favoritos().length === 0) {
+  <p-message severity="warn">No tienes productos favoritos todavía.</p-message>
+} @else {
+  <section class="cuadricula">
+    @for (producto of favoritos(); track producto.id) {
+      <p-card [header]="producto.nombre">
+        <p>{{ producto.descripcion }}</p>
+        <p-tag
+          severity="success"
+          [rounded]="true"
+          [value]="'$' + producto.precio.toLocaleString('es-MX')"
+        />
+
+        <ng-template #footer>
+          <div class="acciones">
+            <a [routerLink]="['/productos', producto.id]" pButton>
+              <span pButtonLabel>Ver detalle</span>
+            </a>
+            <p-button
+              label="Eliminar"
+              severity="danger"
+              (onClick)="abrirDialogoEliminar(producto)"
+            />
+          </div>
+        </ng-template>
+      </p-card>
+    }
+  </section>
+}
+
+<p-dialog
+  header="Eliminar de favoritos"
+  [(visible)]="mostrarDialogo"
+  [modal]="true"
+  [style]="{ width: 'min(28rem, 90vw)' }"
+  (onHide)="productoSeleccionado = null"
+>
+  @if (productoSeleccionado) {
+    <p>¿Deseas eliminar <strong>{{ productoSeleccionado.nombre }}</strong> de tus favoritos?</p>
+  }
+
+  <ng-template #footer>
+    <p-button label="Cancelar" severity="secondary" (onClick)="cancelarEliminacion()" />
+    <p-button label="Confirmar" severity="danger" (onClick)="confirmarEliminacion()" />
+  </ng-template>
+</p-dialog>

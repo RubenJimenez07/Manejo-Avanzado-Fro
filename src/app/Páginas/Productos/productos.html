@@ -1,0 +1,16 @@
+<header class="encabezado">
+  <p>CATÁLOGO LOCAL</p>
+  <h1>Productos</h1>
+  <span>Selecciona un producto para consultar su información completa.</span>
+</header>
+
+<section class="cuadricula">
+  @for (producto of productos; track producto.id) {
+    <app-tarjeta-producto
+      [producto]="producto"
+      (favoritoSeleccionado)="agregarFavorito($event)"
+    />
+  } @empty {
+    <p>No hay productos disponibles.</p>
+  }
+</section>

@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+p-card {
+  display: block;
+  height: 100%;
+}
+
+p {
+  min-height: 3rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+:host ::ng-deep .favorito-seleccionado.p-button:disabled {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #fff;
+  opacity: 1;
+}
