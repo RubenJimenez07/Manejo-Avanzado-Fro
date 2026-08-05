@@ -1,0 +1,100 @@
+<header class="encabezado">
+  <p>ADMINISTRACIÓN</p>
+  <h1>Categorías</h1>
+  <span>Organiza el catálogo creando y administrando sus categorías.</span>
+</header>
+
+<section class="nueva-categoria" aria-labelledby="nueva-categoria-titulo">
+  <h2 id="nueva-categoria-titulo">Nueva categoría</h2>
+  <form #formulario="ngForm" (ngSubmit)="crearCategoria()">
+    <label for="nombreNueva">Nombre</label>
+    <input
+      id="nombreNueva"
+      name="nombreNueva"
+      pInputText
+      [(ngModel)]="nombreNueva"
+      required
+      maxlength="100"
+    />
+    <button type="submit" pButton [disabled]="formulario.invalid">
+      <span pButtonLabel>Crear categoría</span>
+    </button>
+  </form>
+</section>
+
+@if (mensajeError) {
+  <p-message severity="error">{{ mensajeError }}</p-message>
+}
+
+@if (cargando()) {
+  <p-message severity="info">Cargando categorías...</p-message>
+} @else {
+  <section class="cuadricula" aria-label="Lista de categorías">
+    @for (categoria of categorias(); track categoria.id) {
+      <p-card [header]="categoria.nombre">
+        <p>Identificador: {{ categoria.id }}</p>
+        <ng-template #footer>
+          <div class="acciones">
+            <p-button label="Ver productos" (onClick)="verProductos(categoria)" />
+            <p-button label="Editar" severity="secondary" (onClick)="abrirEdicion(categoria)" />
+            <p-button label="Eliminar" severity="danger" (onClick)="abrirEliminacion(categoria)" />
+          </div>
+        </ng-template>
+      </p-card>
+    } @empty {
+      <p-message severity="warn">No hay categorías registradas.</p-message>
+    }
+  </section>
+}
+
+@if (categoriaActiva(); as categoria) {
+  <section aria-label="Productos de la categoría">
+    <h2>Productos de {{ categoria.nombre }}</h2>
+
+    @if (cargandoProductos()) {
+      <p-message severity="info">Cargando productos...</p-message>
+    } @else {
+      <section class="cuadricula">
+        @for (producto of productosCategoria(); track producto.id) {
+          <app-tarjeta-producto
+            [producto]="producto"
+            (favoritoSeleccionado)="agregarFavorito($event)"
+          />
+        } @empty {
+          <p-message severity="warn">No hay productos en esta categoría.</p-message>
+        }
+      </section>
+    }
+  </section>
+}
+
+<p-dialog
+  header="Editar categoría"
+  [(visible)]="mostrarDialogoEdicion"
+  [modal]="true"
+  [style]="{ width: 'min(28rem, 90vw)' }"
+  (onHide)="cerrarDialogos()"
+>
+  <label for="nombreEdicion">Nombre</label>
+  <input id="nombreEdicion" pInputText [(ngModel)]="nombreEdicion" maxlength="100" />
+  <ng-template #footer>
+    <p-button label="Cancelar" severity="secondary" (onClick)="cerrarDialogos()" />
+    <p-button label="Guardar" (onClick)="guardarEdicion()" [disabled]="!nombreEdicion.trim()" />
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  header="Eliminar categoría"
+  [(visible)]="mostrarDialogoEliminacion"
+  [modal]="true"
+  [style]="{ width: 'min(28rem, 90vw)' }"
+  (onHide)="cerrarDialogos()"
+>
+  @if (categoriaSeleccionada) {
+    <p>¿Deseas eliminar la categoría <strong>{{ categoriaSeleccionada.nombre }}</strong>?</p>
+  }
+  <ng-template #footer>
+    <p-button label="Cancelar" severity="secondary" (onClick)="cerrarDialogos()" />
+    <p-button label="Eliminar" severity="danger" (onClick)="confirmarEliminacion()" />
+  </ng-template>
+</p-dialog>

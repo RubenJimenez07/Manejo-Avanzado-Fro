@@ -23,4 +23,43 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.25rem;
+}.formulario-producto {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #dbe3ef;
+  border-radius: 1rem;
+  background: #fff;
 }
+
+.formulario-producto h2 {
+  margin-bottom: 1rem;
+}
+
+.formulario-producto form {
+  display: grid;
+  gap: 1rem;
+}
+
+.formulario-producto .campo {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.formulario-producto label {
+  font-weight: 600;
+}
+
+.formulario-producto input,
+.formulario-producto .p-select {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.formulario-producto button {
+  width: fit-content;
+}
+

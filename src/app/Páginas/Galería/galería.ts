@@ -33,36 +33,36 @@ styleUrl: './galería.css'
 export class Galeria {
   readonly imagenes: ImagenGaleria[] = [
     {
-      src: '/galeria/Montaña de nieve.png',
-      miniatura: '/galeria/Montaña de nieve.png',
+      src: '/galeria/montana-nieve.png',
+      miniatura: '/galeria/montana-nieve.png',
       titulo: 'Montaña de nieve',
       descripcion: 'Un paisaje de montaña cubierto de nieve.',
       alt: 'Montaña cubierta de nieve'
     },
     {
-      src: '/galeria/Cielo Nublado.png',
-      miniatura: '/galeria/Cielo Nublado.png',
+      src: '/galeria/cielo-nublado.png',
+      miniatura: '/galeria/cielo-nublado.png',
       titulo: 'Cielo nublado',
       descripcion: 'Un cielo cubierto de nubes.',
       alt: 'Cielo nublado'
     },
     {
-      src: '/galeria/Cueva Brillante.png',
-      miniatura: '/galeria/Cueva Brillante.png',
+      src: '/galeria/cueva-brillante.png',
+      miniatura: '/galeria/cueva-brillante.png',
       titulo: 'Cueva brillante',
       descripcion: 'Una cueva iluminada con un brillo especial.',
       alt: 'Cueva brillante'
     },
     {
-      src: '/galeria/Tormentan Electrica.png',
-      miniatura: '/galeria/Tormentan Electrica.png',
+      src: '/galeria/tormenta-electrica.png',
+      miniatura: '/galeria/tormenta-electrica.png',
       titulo: 'Tormenta eléctrica',
       descripcion: 'Una tormenta iluminada por rayos.',
       alt: 'Tormenta eléctrica'
     },
     {
-      src: '/galeria/Volcan.png',
-      miniatura: '/galeria/Volcan.png',
+      src: '/galeria/volcan.png',
+      miniatura: '/galeria/volcan.png',
       titulo: 'Volcán',
       descripcion: 'Un volcán en plena actividad.',
       alt: 'Volcán'

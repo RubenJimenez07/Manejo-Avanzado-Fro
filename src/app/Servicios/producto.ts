@@ -1,35 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Producto } from '../Modelos/Producto';
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosServicio {
-  private readonly productos: Producto[] = [
-    {
-      id: 1,
-      nombre: 'Teclado',
-      descripcion: 'Teclado compacto para practicar Angular.',
-      precio: 650
-    },
-    {
-      id: 2,
-      nombre: 'Ratón',
-      descripcion: 'Ratón inalámbrico de uso diario.',
-      precio: 420
-    },
-    {
-      id: 3,
-      nombre: 'Monitor',
-      descripcion: 'Monitor de 24 pulgadas.',
-      precio: 3200
-    }
-  ];
 
-  obtenerProductos(): Producto[] {
-    return this.productos;
+  private http = inject(HttpClient);
+
+  private api = `${environment.apiUrl}/productos`;
+
+  obtenerProductos(categoriaId?: number): Observable<Producto[]> {
+    const url = categoriaId === undefined
+      ? this.api
+      : `${this.api}?categoria=${categoriaId}`;
+
+    return this.http.get<Producto[]>(url);
   }
 
-  obtenerProductoPorId(id: number): Producto | undefined {
-    return this.productos.find((producto) => producto.id === id);
+  obtenerProductoPorId(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.api}/${id}`);
+  }
+
+  crearProducto(producto: Partial<Producto>): Observable<unknown> {
+    return this.http.post(this.api, producto);
   }
 }

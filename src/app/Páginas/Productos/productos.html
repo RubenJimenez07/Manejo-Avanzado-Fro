@@ -4,8 +4,81 @@
   <span>Selecciona un producto para consultar su información completa.</span>
 </header>
 
+<section class="formulario-producto" aria-labelledby="titulo-nuevo-producto">
+  <h2 id="titulo-nuevo-producto">Agregar producto</h2>
+  <form #formulario="ngForm" (ngSubmit)="crearProducto()" class="formulario-nuevo-producto">
+    <div class="campo">
+      <label for="nombreNuevo">Nombre</label>
+      <input
+        id="nombreNuevo"
+        name="nombreNuevo"
+        type="text"
+        [(ngModel)]="nombreNuevo"
+        required
+      />
+    </div>
+
+    <div class="campo">
+      <label for="descripcionNueva">Descripción</label>
+      <input
+        id="descripcionNueva"
+        name="descripcionNueva"
+        type="text"
+        [(ngModel)]="descripcionNueva"
+      />
+    </div>
+
+    <div class="campo">
+      <label for="precioNuevo">Precio</label>
+      <input
+        id="precioNuevo"
+        name="precioNuevo"
+        type="number"
+        min="0"
+        step="0.01"
+        [(ngModel)]="precioNuevo"
+        required
+      />
+    </div>
+
+    <div class="campo">
+      <label for="imagenNueva">Imagen</label>
+      <input
+        id="imagenNueva"
+        name="imagenNueva"
+        type="text"
+        [(ngModel)]="imagenNueva"
+      />
+    </div>
+
+    <div class="campo">
+      <label for="categoriaNueva">Categoría</label>
+      @if (cargandoCategorias()) {
+        <p>Cargando categorías...</p>
+      } @else {
+      <p-select
+          id="categoriaNueva"
+          name="categoriaNueva"
+          [options]="categorias()"
+          [(ngModel)]="categoriaSeleccionadaId"
+          optionLabel="nombre"
+          optionValue="id"
+          placeholder="Selecciona una categoría"
+      ></p-select>
+      }
+    </div>
+
+    <button
+      type="submit"
+      pButton
+      label="Guardar producto"
+      [disabled]="!nombreNuevo.trim() || !categoriaSeleccionadaId || precioNuevo <= 0"
+    ></button>
+  </form>
+</section>
+
 <section class="cuadricula">
-  @for (producto of productos; track producto.id) {
+  @for (producto of productos(); track producto.id) {
     <app-tarjeta-producto
       [producto]="producto"
       (favoritoSeleccionado)="agregarFavorito($event)"

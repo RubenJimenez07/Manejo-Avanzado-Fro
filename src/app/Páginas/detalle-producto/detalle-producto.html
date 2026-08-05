@@ -1,4 +1,6 @@
-@if (producto) {
+@if (cargando()) {
+  <p-message severity="info">Cargando producto...</p-message>
+} @else if (producto(); as producto) {
   <section class="detalle">
     <p-card [header]="producto.nombre" subheader="Información del producto">
       <p>{{ producto.descripcion }}</p>

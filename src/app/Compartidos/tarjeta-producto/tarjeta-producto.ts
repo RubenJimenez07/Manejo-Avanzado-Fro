@@ -5,6 +5,7 @@ import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { Producto } from '../../Modelos/Producto';
 import { FavoritosServicio } from '../../Servicios/favoritos';
+
 @Component({
   selector: 'app-tarjeta-producto',
   standalone: true,
@@ -13,15 +14,17 @@ import { FavoritosServicio } from '../../Servicios/favoritos';
   styleUrl: './tarjeta-producto.css'
 })
 export class TarjetaProducto {
+
   readonly producto = input.required<Producto>();
   readonly favoritoSeleccionado = output<Producto>();
 
   private readonly favoritosServicio = inject(FavoritosServicio);
+
   readonly favoritos = this.favoritosServicio.obtenerTodos();
 
   esFavorito(): boolean {
     return this.favoritos().some(
-      (favorito) => favorito.id === this.producto().id
+      favorito => favorito.id === this.producto().id
     );
   }
 
