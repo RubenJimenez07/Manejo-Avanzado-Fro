@@ -13,7 +13,7 @@ import { FavoritosServicio } from '../../Servicios/favoritos';
   standalone: true,
   imports: [RouterLink, ButtonModule, CardModule, DialogModule, MessageModule, TagModule],
   templateUrl: './favoritos.html',
-  styleUrl: './favoritos.css'
+  styleUrl: './Favoritos.css'
 })
 export class Favoritos {
   private readonly favoritosServicio = inject(FavoritosServicio);
